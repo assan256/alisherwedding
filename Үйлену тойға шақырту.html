@@ -1,32 +1,60 @@
-
 <!DOCTYPE html>
 <html lang="kk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Алишер & Земфира</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{scroll-behavior:smooth;background:#f8f6f2;color:#2b2b2b;font-family:'Montserrat',sans-serif}
-section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:60px 20px}
 
-/* HERO SLIDER */
+body{
+    scroll-behavior:smooth;
+    background:#f8f6f2;
+    color:#2b2b2b;
+    font-family:'Montserrat',sans-serif;
+    overflow-x:hidden;
+}
+
+section{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:60px 20px;
+}
+
+/* -------- FIRST SCREEN -------- */
+
+.first-screen{
+    padding:0;
+}
+
+.first-image{
+    width:100%;
+    height:100vh;
+    object-fit:cover;
+}
+
+/* -------- HERO SLIDER -------- */
+
 .hero{
     position:relative;
-    overflow:hidden;
     height:100vh;
+    overflow:hidden;
     background:#000;
-    color:#fff;
 }
 
 .slide{
     position:absolute;
     inset:0;
-    background-size:contain; /* толық фото көрінеді */
+    background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
-    background-color:#000;
     opacity:0;
     transition:opacity 1.5s ease-in-out, transform 8s ease-in-out;
     transform:scale(1);
@@ -34,77 +62,169 @@ section{min-height:100vh;display:flex;flex-direction:column;justify-content:cent
 
 .slide.active{
     opacity:1;
-    transform:scale(1.05); /* жұмсақ cinematic zoom */
-}
-
-.hero-content{
-    position:relative;
-    z-index:2;
-    background:rgba(0,0,0,0.35);
-    padding:40px 60px;
-    border-radius:20px;
-    backdrop-filter:blur(4px);
+    transform:scale(1.08);
 }
 
 .hero::after{
     content:'';
     position:absolute;
     inset:0;
-    background:linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2));
+    background:linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0.2));
 }
 
-h1{
+/* -------- TEXT BLOCK -------- */
+
+.invite-text{
+    max-width:800px;
+    opacity:0;
+    transform:translateY(40px);
+    transition:1s ease;
+}
+
+.invite-text.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.invite-text p{
+    font-size:18px;
+    line-height:1.8;
+    margin-bottom:18px;
+}
+
+.divider{
+    margin:40px 0;
+    font-size:16px;
+    letter-spacing:2px;
+}
+
+/* -------- CALENDAR -------- */
+
+.calendar{
+    width:95%;
+    max-width:360px;
+    background:#fff;
+    padding:25px 15px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.calendar h2{
     font-family:'Cormorant Garamond',serif;
-    font-size:64px;
-    font-weight:600;
-    letter-spacing:3px;
+    font-size:26px;
+    margin-bottom:15px;
 }
 
-.hero-date{
+.calendar table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:16px;
+}
+
+.calendar td, .calendar th{
+    height:45px;
+}
+
+.calendar .wedding-day{
+    border:2px solid #b38b59;
+    border-radius:50%;
+    font-weight:bold;
+    color:#b38b59;
+}
+
+/* -------- LOCATION -------- */
+
+.location-box{
+    background:#fff;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    text-decoration:none;
+    color:#2b2b2b;
+    margin-top:30px;
+    transition:0.3s;
+}
+
+.location-box:hover{
+    transform:translateY(-5px);
+}
+
+.map-img{
+    width:100%;
+    max-width:350px;
+    border-radius:20px;
     margin-top:20px;
-    font-size:22px;
-    letter-spacing:6px;
 }
 
-/* INVITE TEXT */
-.invite-text{max-width:900px}
-.invite-text p{font-size:20px;line-height:1.9;margin-bottom:18px}
-.invite-text .highlight{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin:25px 0}
-.divider{margin:40px 0;font-size:18px;letter-spacing:2px}
+/* -------- COUNTDOWN -------- */
 
-/* LOCATION */
-.location-box{background:#ffffff;padding:30px 40px;border-radius:20px;box-shadow:0 15px 40px rgba(0,0,0,0.08);text-decoration:none;color:#2b2b2b;transition:0.3s}
-.location-box:hover{transform:translateY(-5px)}
-.location-box h3{font-family:'Cormorant Garamond',serif;font-size:28px;margin-bottom:10px}
-.map-img{width:100%;max-width:600px;border-radius:20px;margin-top:25px;box-shadow:0 10px 30px rgba(0,0,0,0.1)}
+.countdown{
+    margin-top:25px;
+    font-size:18px;
+    letter-spacing:2px;
+}
 
-/* RSVP */
-.rsvp-title{font-family:'Cormorant Garamond',serif;font-size:36px;margin-bottom:20px}
-form{display:flex;flex-direction:column;gap:15px;width:320px;margin-top:20px}
-input,select{padding:12px;border-radius:10px;border:1px solid #ddd;font-size:15px}
-button{padding:12px;border:none;border-radius:30px;background:#b38b59;color:#fff;font-size:15px;cursor:pointer;transition:0.3s}
-button:hover{background:#9c774b}
-footer{margin-top:40px;font-size:14px;color:#777}
+/* -------- RSVP -------- */
+
+.rsvp-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+form{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    width:100%;
+    max-width:320px;
+}
+
+input,select{
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #ddd;
+    font-size:15px;
+}
+
+button{
+    padding:12px;
+    border:none;
+    border-radius:30px;
+    background:#b38b59;
+    color:#fff;
+    font-size:15px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#9c774b;
+}
+
+footer{
+    margin-top:30px;
+    font-size:14px;
+    color:#777;
+}
 </style>
 </head>
+
 <body>
 
-<!-- 1 БЕТ -->
-<section>
-<img class="map-img" src="AZ.png" style="max-width: 100%; height: 100%;">
+<!-- 1 SCREEN -->
+<section class="first-screen">
+<img src="AZ.png" class="first-image">
 </section>
 
-
-<!-- 2 БЕТ -->
+<!-- 2 SCREEN SLIDER -->
 <section class="hero">
 <div class="slide active" style="background-image:url('DSC00564.JPG')"></div>
 <div class="slide" style="background-image:url('DSC00566.JPG')"></div>
 <div class="slide" style="background-image:url('DSC00573.JPG')"></div>
 </section>
 
-
-
-<!-- 3 БЕТ -->
+<!-- 3 SCREEN INVITE -->
 <section>
 <div class="invite-text">
 <p>Бүгін тағы ата-дәстүр жалғасты,<br>
@@ -117,62 +237,51 @@ footer{margin-top:40px;font-size:14px;color:#777}
 Құрбы-құрдастар, Әріптестер мен көршілер!</p>
 
 <p>Сіз (дер)ді ұлым Алишер мен келінім Земфираның<br>
-Үйлену тойына арналған<br>
-Салтанатты ақ дастарханның<br>
+Үйлену тойына арналған салтанатты ақ дастарханның<br>
 Қадірлі қонағы болуға шақырамын!</p>
 
 <div class="divider">
-<hr style="border: none; background-color: black; height: 2px; width: 50%; margin: 0 auto 20px;">
-18 шілде, 2026<br>
-сағат 17:00<br>
-<hr style="border: none; background-color: black; height: 2px; width: 50%; margin: 20px auto 20px;">
+18 шілде, 2026 • 17:00<br>
 Той иелері: Серік-Қымбат
 </div>
+
+<div class="countdown" id="countdown"></div>
+
 </div>
 </section>
 
-<!-- 4 БЕТ -->
-<section style="text-align: center; padding: 20px;">
-<div style="font-family: 'Georgia', serif; border: 1px solid #ddd; padding: 30px 20px; width: 90%; max-width: 400px; text-align: center; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-radius: 15px; margin: -50px auto 40px auto; box-sizing: border-box;"> 
-  <h2 style="margin: 0 0 20px 0; color: #333; font-size: 28px;">Шілде 2026</h2>
-  <table style="width: 100%; border-collapse: collapse; font-size: 18px; table-layout: fixed;">
-    <tr style="color: #888; height: 40px;">
-      <th>Дс</th><th>Сс</th><th>Ср</th><th>Бс</th><th>Жм</th><th style="color: #d9534f;">Сн</th><th style="color: #d9534f;">Жс</th>
-    </tr>
-    <tr style="height: 50px;">
-      <td></td><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td>
-    </tr>
-    <tr style="height: 50px;">
-      <td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td>
-    </tr>
-    <tr style="height: 50px;">
-      <td>13</td><td>14</td><td>15</td><td>16</td><td>17</td>
-      <td style="position: relative;">
-        <span style="border: 2px solid red; border-radius: 50%; width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; color: red; font-weight: bold; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">18</span>
-      </td>
-      <td>19</td>
-    </tr>
-    <tr style="height: 50px;">
-      <td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td>
-    </tr>
-    <tr style="height: 50px;">
-      <td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td></td><td></td>
-    </tr>
-  </table>
-</div>
-
-<a class="location-box" href="https://2gis.kz/kostanay/geo/70000001039602937/63.598813,53.244056" target="_blank" style="text-decoration: none; color: inherit; display: block; margin-bottom: 20px;">
-  <h3 style="margin: 0;">Hanzada мейрамханасы</h3>
-  <p style="margin: 5px 0;">Қостанай қаласы</p>
-</a>
-<img class="map-img" src="1.jpg" alt="map" style="max-width: 100%; height: 100%;">
-</section>
-
-
-<!-- 5 БЕТ -->
+<!-- 4 SCREEN CALENDAR + LOCATION -->
 <section>
-<div class="rsvp-title">Қуанышымыздың қадірлі қонағы болыңыздар!<br>
-Тойға қатысуларыңызды растауларыңызды сұраймыз!</div>
+
+<div class="calendar">
+<h2>Шілде 2026</h2>
+<table>
+<tr>
+<th>Дс</th><th>Сс</th><th>Ср</th><th>Бс</th><th>Жм</th><th>Сн</th><th>Жс</th>
+</tr>
+<tr><td></td><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+<tr><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
+<tr><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td class="wedding-day">18</td><td>19</td></tr>
+<tr><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td></tr>
+<tr><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td></td><td></td></tr>
+</table>
+</div>
+
+<a class="location-box" href="https://2gis.kz/kostanay/geo/70000001039602937/63.598813,53.244056" target="_blank">
+<h3>Hanzada мейрамханасы</h3>
+<p>Қостанай қаласы</p>
+</a>
+
+<img class="map-img" src="1.jpg">
+
+</section>
+
+<!-- 5 SCREEN RSVP -->
+<section>
+
+<div class="rsvp-title">
+Қуанышымыздың қадірлі қонағы болыңыздар!
+</div>
 
 <form>
 <input type="text" placeholder="Аты-жөніңіз">
@@ -183,10 +292,13 @@ footer{margin-top:40px;font-size:14px;color:#777}
 </select>
 <button type="submit">Жіберу</button>
 </form>
+
 <footer>Алишер & Земфира • 2026</footer>
+
 </section>
 
 <script>
+// slider
 let slides=document.querySelectorAll('.slide');
 let index=0;
 setInterval(()=>{
@@ -194,10 +306,33 @@ slides[index].classList.remove('active');
 index=(index+1)%slides.length;
 slides[index].classList.add('active');
 },4000);
+
+// fade-in on scroll
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add('show');
+}
+});
+});
+observer.observe(document.querySelector('.invite-text'));
+
+// countdown
+const weddingDate=new Date("July 18, 2026 17:00:00").getTime();
+const countdown=document.getElementById("countdown");
+
+setInterval(()=>{
+const now=new Date().getTime();
+const distance=weddingDate-now;
+
+const days=Math.floor(distance/(1000*60*60*24));
+const hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+const minutes=Math.floor((distance%(1000*60*60))/(1000*60));
+
+countdown.innerHTML=`Тойға дейін: ${days} күн ${hours} сағат ${minutes} минут`;
+},1000);
+
 </script>
 
 </body>
 </html>
-
-
-

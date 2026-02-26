@@ -2,21 +2,17 @@
 <html lang="kk">
 <head>
 
-    <meta charset="UTF-8">
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Үйлену тойына шақыру">
-    <meta property="og:description" content="Сіздерді біздің қуанышымызға ортақ болуға шақырамыз">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://assan256.github.io/alisherwedding/Үйлену тойға шақырту.html">
-    <meta property="og:image" content="https://github.com/assan256/alisherwedding/blob/main/AZ.png">
-
-    <!-- Рекомендуется -->
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-
-    
 <meta charset="UTF-8">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Үйлену тойына шақыру">
+<meta property="og:description" content="Сіздерді біздің қуанышымызға ортақ болуға шақырамыз">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://assan256.github.io/alisherwedding/Үйлену тойға шақырту.html">
+<meta property="og:image" content="https://raw.githubusercontent.com/assan256/alisherwedding/main/AZ.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Алишер & Земфира</title>
 
@@ -43,19 +39,14 @@ section{
     padding:60px 20px;
 }
 
-/* -------- FIRST SCREEN -------- */
-
-.first-screen{
-    padding:0;
-}
+.first-screen{padding:0;}
 
 .first-image{
     width:95%;
     height:95vh;
 }
 
-/* -------- HERO SLIDER -------- */
-
+/* HERO */
 .hero{
     position:relative;
     height:100vh;
@@ -86,8 +77,7 @@ section{
     background:linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0.2));
 }
 
-/* -------- TEXT BLOCK -------- */
-
+/* INVITE */
 .invite-text{
     max-width:800px;
     opacity:0;
@@ -112,8 +102,7 @@ section{
     letter-spacing:2px;
 }
 
-/* -------- CALENDAR -------- */
-
+/* CALENDAR */
 .calendar{
     width:95%;
     max-width:360px;
@@ -146,8 +135,7 @@ section{
     color:#b38b59;
 }
 
-/* -------- LOCATION -------- */
-
+/* LOCATION */
 .location-box{
     background:#fff;
     padding:25px;
@@ -157,10 +145,25 @@ section{
     color:#2b2b2b;
     margin-top:30px;
     transition:0.3s;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
 }
 
 .location-box:hover{
     transform:translateY(-5px);
+}
+
+.location-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.dg-icon{
+    width:26px;
+    height:26px;
 }
 
 .map-img{
@@ -170,16 +173,14 @@ section{
     margin-top:20px;
 }
 
-/* -------- COUNTDOWN -------- */
-
+/* COUNTDOWN */
 .countdown{
     margin-top:25px;
     font-size:18px;
     letter-spacing:2px;
 }
 
-/* -------- RSVP -------- */
-
+/* RSVP */
 .rsvp-title{
     font-family:'Cormorant Garamond',serif;
     font-size:28px;
@@ -226,19 +227,16 @@ footer{
 
 <body>
 
-<!-- 1 SCREEN -->
 <section class="first-screen">
 <img src="AZ.png" class="first-image">
 </section>
 
-<!-- 2 SCREEN SLIDER -->
 <section class="hero">
 <div class="slide active" style="background-image:url('DSC00564.JPG')"></div>
 <div class="slide" style="background-image:url('DSC00566.JPG')"></div>
 <div class="slide" style="background-image:url('DSC00573.JPG')"></div>
 </section>
 
-<!-- 3 SCREEN INVITE -->
 <section>
 <div class="invite-text">
 <p>Бүгін тағы ата-дәстүр жалғасты,<br>
@@ -260,11 +258,9 @@ footer{
 </div>
 
 <div class="countdown" id="countdown"></div>
-
 </div>
 </section>
 
-<!-- 4 SCREEN CALENDAR + LOCATION -->
 <section>
 
 <div class="calendar">
@@ -282,15 +278,20 @@ footer{
 </div>
 
 <a class="location-box" href="https://2gis.kz/kostanay/geo/70000001039602937/63.598813,53.244056" target="_blank">
+
+<div class="location-title">
+<img src="2gis.png" class="dg-icon" alt="2GIS">
 <h3>Hanzada мейрамханасы</h3>
+</div>
+
 <p>Қостанай қаласы</p>
+
 </a>
 
 <img class="map-img" src="1.jpg">
 
 </section>
 
-<!-- 5 SCREEN RSVP -->
 <section>
 
 <div class="rsvp-title">
@@ -301,10 +302,7 @@ footer{
       method="POST" 
       target="_blank">
 
-<input type="text" 
-       name="entry.32785838"  
-       placeholder="Аты-жөніңіз" 
-       required>
+<input type="text" name="entry.32785838" placeholder="Аты-жөніңіз" required>
 
 <select name="entry.969246838">
 <option value="Бір өзім барамын">Бір өзім барамын</option>
@@ -320,7 +318,6 @@ footer{
 </section>
 
 <script>
-// slider
 let slides=document.querySelectorAll('.slide');
 let index=0;
 setInterval(()=>{
@@ -329,7 +326,6 @@ index=(index+1)%slides.length;
 slides[index].classList.add('active');
 },4000);
 
-// fade-in on scroll
 const observer=new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting){
@@ -339,7 +335,6 @@ entry.target.classList.add('show');
 });
 observer.observe(document.querySelector('.invite-text'));
 
-// countdown
 const weddingDate=new Date("July 18, 2026 17:00:00").getTime();
 const countdown=document.getElementById("countdown");
 
@@ -353,9 +348,7 @@ const minutes=Math.floor((distance%(1000*60*60))/(1000*60));
 
 countdown.innerHTML=`Тойға дейін: ${days} күн ${hours} сағат ${minutes} минут`;
 },1000);
-
 </script>
 
 </body>
 </html>
-

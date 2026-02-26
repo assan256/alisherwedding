@@ -1,354 +1,382 @@
 <!DOCTYPE html>
 <html lang="kk">
 <head>
+  <meta charset="UTF-8">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Үйлену тойына шақыру">
+  <meta property="og:description" content="Сіздерді біздің қуанышымызға ортақ болуға шақырамыз">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://assan256.github.io/alisherwedding/Үйлену тойға шақырту.html">
+  <meta property="og:image" content="https://raw.githubusercontent.com/assan256/alisherwedding/main/AZ.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Алишер & Земфира</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      scroll-behavior:smooth;
+      background:#f8f6f2;
+      color:#2b2b2b;
+      font-family:'Montserrat',sans-serif;
+      overflow-x:hidden;
+    }
+    section{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:60px 20px;
+    }
+    .first-screen{padding:0;}
+    .first-image{ width:95%; height:95vh; }
 
-<meta charset="UTF-8">
+    /* HERO */
+    .hero{
+      position:relative;
+      height:100vh;
+      overflow:hidden;
+      background:#000;
+    }
+    .slide{
+      position:absolute;
+      inset:0;
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      opacity:0;
+      transition:opacity 1.5s ease-in-out, transform 8s ease-in-out;
+      transform:scale(1);
+    }
+    .slide.active{
+      opacity:1;
+      transform:scale(1.08);
+    }
+    .hero::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0.2));
+    }
 
-<!-- Open Graph -->
-<meta property="og:title" content="Үйлену тойына шақыру">
-<meta property="og:description" content="Сіздерді біздің қуанышымызға ортақ болуға шақырамыз">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://assan256.github.io/alisherwedding/Үйлену тойға шақырту.html">
-<meta property="og:image" content="https://raw.githubusercontent.com/assan256/alisherwedding/main/AZ.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+    /* INVITE */
+    .invite-text{
+      max-width:800px;
+      opacity:0;
+      transform:translateY(40px);
+      transition:1s ease;
+    }
+    .invite-text.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+    .invite-text p{
+      font-size:18px;
+      line-height:1.8;
+      margin-bottom:18px;
+    }
+    .divider{
+      margin:40px 0;
+      font-size:16px;
+      letter-spacing:2px;
+    }
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Алишер & Земфира</title>
+    /* CALENDAR */
+    .calendar{
+      width:95%;
+      max-width:360px;
+      background:#fff;
+      padding:25px 15px;
+      border-radius:20px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    }
+    .calendar h2{
+      font-family:'Cormorant Garamond',serif;
+      font-size:26px;
+      margin-bottom:15px;
+    }
+    .calendar table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:16px;
+    }
+    .calendar td, .calendar th{
+      height:45px;
+    }
+    .calendar .wedding-day{
+      border:2px solid #b38b59;
+      border-radius:50%;
+      font-weight:bold;
+      color:#b38b59;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    /* LOCATION */
+    .location-box{
+      background:#fff;
+      padding:25px;
+      border-radius:20px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.08);
+      text-decoration:none;
+      color:#2b2b2b;
+      margin-top:30px;
+      transition:0.3s;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:10px;
+    }
+    .location-box:hover{
+      transform:translateY(-5px);
+    }
+    .location-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .dg-icon{ width:26px; height:26px; }
+    .map-img{ width:100%; max-width:350px; border-radius:20px; margin-top:20px; }
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
+    /* COUNTDOWN */
+    .countdown{
+      margin-top:25px;
+      font-size:18px;
+      letter-spacing:2px;
+    }
 
-body{
-    scroll-behavior:smooth;
-    background:#f8f6f2;
-    color:#2b2b2b;
-    font-family:'Montserrat',sans-serif;
-    overflow-x:hidden;
-}
+    /* RSVP */
+    .rsvp-title{
+      font-family:'Cormorant Garamond',serif;
+      font-size:28px;
+      margin-bottom:20px;
+    }
+    form{
+      display:flex;
+      flex-direction:column;
+      gap:15px;
+      width:100%;
+      max-width:320px;
+    }
+    input,select{
+      padding:12px;
+      border-radius:10px;
+      border:1px solid #ddd;
+      font-size:15px;
+    }
+    button{
+      padding:12px;
+      border:none;
+      border-radius:30px;
+      background:#b38b59;
+      color:#fff;
+      font-size:15px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+    button:hover{
+      background:#9c774b;
+    }
+    footer{
+      margin-top:30px;
+      font-size:14px;
+      color:#777;
+    }
 
-section{
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:60px 20px;
-}
-
-.first-screen{padding:0;}
-
-.first-image{
-    width:95%;
-    height:95vh;
-}
-
-/* HERO */
-.hero{
-    position:relative;
-    height:100vh;
-    overflow:hidden;
-    background:#000;
-}
-
-.slide{
-    position:absolute;
-    inset:0;
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-    opacity:0;
-    transition:opacity 1.5s ease-in-out, transform 8s ease-in-out;
-    transform:scale(1);
-}
-
-.slide.active{
-    opacity:1;
-    transform:scale(1.08);
-}
-
-.hero::after{
-    content:'';
-    position:absolute;
-    inset:0;
-    background:linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0.2));
-}
-
-/* INVITE */
-.invite-text{
-    max-width:800px;
-    opacity:0;
-    transform:translateY(40px);
-    transition:1s ease;
-}
-
-.invite-text.show{
-    opacity:1;
-    transform:translateY(0);
-}
-
-.invite-text p{
-    font-size:18px;
-    line-height:1.8;
-    margin-bottom:18px;
-}
-
-.divider{
-    margin:40px 0;
-    font-size:16px;
-    letter-spacing:2px;
-}
-
-/* CALENDAR */
-.calendar{
-    width:95%;
-    max-width:360px;
-    background:#fff;
-    padding:25px 15px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.08);
-}
-
-.calendar h2{
-    font-family:'Cormorant Garamond',serif;
-    font-size:26px;
-    margin-bottom:15px;
-}
-
-.calendar table{
-    width:100%;
-    border-collapse:collapse;
-    font-size:16px;
-}
-
-.calendar td, .calendar th{
-    height:45px;
-}
-
-.calendar .wedding-day{
-    border:2px solid #b38b59;
-    border-radius:50%;
-    font-weight:bold;
-    color:#b38b59;
-}
-
-/* LOCATION */
-.location-box{
-    background:#fff;
-    padding:25px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.08);
-    text-decoration:none;
-    color:#2b2b2b;
-    margin-top:30px;
-    transition:0.3s;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:10px;
-}
-
-.location-box:hover{
-    transform:translateY(-5px);
-}
-
-.location-title{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.dg-icon{
-    width:26px;
-    height:26px;
-}
-
-.map-img{
-    width:100%;
-    max-width:350px;
-    border-radius:20px;
-    margin-top:20px;
-}
-
-/* COUNTDOWN */
-.countdown{
-    margin-top:25px;
-    font-size:18px;
-    letter-spacing:2px;
-}
-
-/* RSVP */
-.rsvp-title{
-    font-family:'Cormorant Garamond',serif;
-    font-size:28px;
-    margin-bottom:20px;
-}
-
-form{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-    width:100%;
-    max-width:320px;
-}
-
-input,select{
-    padding:12px;
-    border-radius:10px;
-    border:1px solid #ddd;
-    font-size:15px;
-}
-
-button{
-    padding:12px;
-    border:none;
-    border-radius:30px;
-    background:#b38b59;
-    color:#fff;
-    font-size:15px;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-button:hover{
-    background:#9c774b;
-}
-
-footer{
-    margin-top:30px;
-    font-size:14px;
-    color:#777;
-}
-</style>
+    /* Language Switcher */
+    #lang-switcher {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+      display: flex;
+      gap: 10px;
+    }
+    .lang-btn {
+      padding: 10px 16px;
+      font-size: 15px;
+      font-weight: 500;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: #b38b59;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .lang-btn:hover {
+      background: #9c774b;
+      transform: translateY(-2px);
+    }
+    .lang-btn.active {
+      background: #8a623f;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    }
+  </style>
 </head>
+<body data-lang="kk">
 
-<body>
+  <div id="lang-switcher">
+    <button class="lang-btn active" data-lang="kk">Қазақша</button>
+    <button class="lang-btn" data-lang="ru">Русский</button>
+  </div>
 
-<section class="first-screen">
-<img src="AZ.png" class="first-image">
-</section>
+  <section class="first-screen">
+    <img src="AZ.png" class="first-image">
+  </section>
 
-<section class="hero">
-<div class="slide active" style="background-image:url('DSC00564.JPG')"></div>
-<div class="slide" style="background-image:url('DSC00566.JPG')"></div>
-<div class="slide" style="background-image:url('DSC00573.JPG')"></div>
-</section>
+  <section class="hero">
+    <div class="slide active" style="background-image:url('DSC00564.JPG')"></div>
+    <div class="slide" style="background-image:url('DSC00566.JPG')"></div>
+    <div class="slide" style="background-image:url('DSC00573.JPG')"></div>
+  </section>
 
-<section>
-<div class="invite-text">
-<p>Бүгін тағы ата-дәстүр жалғасты,<br>
-Басталмақшы құтты қадам алғашқы,<br>
-Қол ұстасып отау тіккен қос балам,<br>
-Көпшіліктің ақ батасын алмақшы</p>
+  <section>
+    <div class="invite-text" id="invite-content">
+      <p data-kk="Бүгін тағы ата-дәстүр жалғасты,<br> Басталмақшы құтты қадам алғашқы,<br> Қол ұстасып отау тіккен қос балам,<br> Көпшіліктің ақ батасын алмақшы"
+         data-ru="Сегодня вновь продолжается традиция предков,<br> Начинается благословенный первый шаг,<br> Взявшись за руки, наши дети создают семью,<br> Получают благословение от всех собравшихся"></p>
 
-<p>Құрметті ағайын-туыс, Нағашы-бауырлар,<br>
-Құда-жекжат, Жиен-бөлелер,<br>
-Құрбы-құрдастар, Әріптестер мен көршілер!</p>
+      <p data-kk="Құрметті ағайын-туыс, Нағашы-бауырлар,<br> Құда-жекжат, Жиен-бөлелер,<br> Құрбы-құрдастар, Әріптестер мен көршілер!"
+         data-ru="Уважаемые родственники, близкие и дальние,<br> Сваты, племянники и племянницы,<br> Друзья, коллеги и соседи!"></p>
 
-<p>Сіз (дер)ді ұлым Алишер мен келінім Земфираның<br>
-Үйлену тойына арналған салтанатты ақ дастарханның<br>
-Қадірлі қонағы болуға шақырамын!</p>
+      <p data-kk="Сіз (дер)ді ұлым Алишер мен келінім Земфираның<br> Үйлену тойына арналған салтанатты ақ дастарханның<br> Қадірлі қонағы болуға шақырамын!"
+         data-ru="Приглашаю Вас стать дорогими гостями на торжественном белом дастархане,<br> посвящённом свадьбе моего сына Алишера и невестки Земфиры!"></p>
 
-<div class="divider">
-18 шілде, 2026 • 17:00<br>
-Той иелері: Серік-Қымбат
-</div>
+      <div class="divider" id="divider-date"
+           data-kk="18 шілде, 2026 • 17:00<br>Той иелері: Серік-Қымбат"
+           data-ru="18 июля 2026 • 17:00<br>Хозяева торжества: Серик-Кымбат"></div>
 
-<div class="countdown" id="countdown"></div>
-</div>
-</section>
+      <div class="countdown" id="countdown"></div>
+    </div>
+  </section>
 
-<section>
+  <section>
+    <div class="calendar">
+      <h2 data-kk="Шілде 2026" data-ru="Июль 2026">Шілде 2026</h2>
+      <table>
+        <tr><th data-kk="Дс" data-ru="Пн">Дс</th><th data-kk="Сс" data-ru="Вт">Сс</th><th data-kk="Ср" data-ru="Ср">Ср</th><th data-kk="Бс" data-ru="Чт">Бс</th><th data-kk="Жм" data-ru="Пт">Жм</th><th data-kk="Сн" data-ru="Сб">Сн</th><th data-kk="Жс" data-ru="Вс">Жс</th></tr>
+        <tr><td></td><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+        <tr><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
+        <tr><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td class="wedding-day">18</td><td>19</td></tr>
+        <tr><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td></tr>
+        <tr><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td></td><td></td></tr>
+      </table>
+    </div>
 
-<div class="calendar">
-<h2>Шілде 2026</h2>
-<table>
-<tr>
-<th>Дс</th><th>Сс</th><th>Ср</th><th>Бс</th><th>Жм</th><th>Сн</th><th>Жс</th>
-</tr>
-<tr><td></td><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
-<tr><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
-<tr><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td class="wedding-day">18</td><td>19</td></tr>
-<tr><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td></tr>
-<tr><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td></td><td></td></tr>
-</table>
-</div>
+    <a class="location-box" href="https://2gis.kz/kostanay/geo/70000001039602937/63.598813,53.244056" target="_blank">
+      <div class="location-title">
+        <img src="2gis.png" class="dg-icon" alt="2GIS">
+        <h3 data-kk="Hanzada мейрамханасы" data-ru="Ресторан Hanzada">Hanzada мейрамханасы</h3>
+      </div>
+      <p data-kk="Қостанай қаласы" data-ru="Город Костанай">Қостанай қаласы</p>
+    </a>
 
-<a class="location-box" href="https://2gis.kz/kostanay/geo/70000001039602937/63.598813,53.244056" target="_blank">
+    <img class="map-img" src="1.jpg">
+  </section>
 
-<div class="location-title">
-<img src="2gis.png" class="dg-icon" alt="2GIS">
-<h3>Hanzada мейрамханасы</h3>
-</div>
+  <section>
+    <div class="rsvp-title" data-kk="Қуанышымыздың қадірлі қонағы болыңыздар!" data-ru="Будьте дорогими гостями нашей радости!">
+      Қуанышымыздың қадірлі қонағы болыңыздар!
+    </div>
 
-<p>Қостанай қаласы</p>
+    <form action="https://docs.google.com/forms/d/e/1FAIpQLSfBo3Q5leVfIbbLsRE7vVDKdZu3A-NCv3bqmATWkWr4b2-8_g/formResponse" method="POST" target="_blank">
+      <input type="text" name="entry.32785838" data-kk-placeholder="Аты-жөніңіз" data-ru-placeholder="ФИО" placeholder="Аты-жөніңіз" required>
+      <select name="entry.969246838">
+        <option value="Бір өзім барамын" data-ru="Пойду один(а)">Бір өзім барамын</option>
+        <option value="Жұбайыммен барамын" data-ru="Пойду с супругом/супругой">Жұбайыммен барамын</option>
+        <option value="Өкінішке орай бара алмаймын" data-ru="К сожалению, не смогу прийти">Өкінішке орай бара алмаймын</option>
+      </select>
+      <button type="submit" data-kk="Жіберу" data-ru="Отправить">Жіберу</button>
+    </form>
 
-</a>
+    <footer>Алишер & Земфира • 2026</footer>
+  </section>
 
-<img class="map-img" src="1.jpg">
+  <script>
+    // Slideshow
+    let slides = document.querySelectorAll('.slide');
+    let index = 0;
+    setInterval(() => {
+      slides[index].classList.remove('active');
+      index = (index + 1) % slides.length;
+      slides[index].classList.add('active');
+    }, 4000);
 
-</section>
+    // Fade-in invite text
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    });
+    observer.observe(document.querySelector('.invite-text'));
 
-<section>
+    // Countdown
+    const weddingDate = new Date("July 18, 2026 17:00:00").getTime();
+    const countdownEl = document.getElementById("countdown");
 
-<div class="rsvp-title">
-Қуанышымыздың қадірлі қонағы болыңыздар!
-</div>
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 
-<form action="https://docs.google.com/forms/d/e/1FAIpQLSfBo3Q5leVfIbbLsRE7vVDKdZu3A-NCv3bqmATWkWr4b2-8_g/formResponse" 
-      method="POST" 
-      target="_blank">
+      const lang = document.body.dataset.lang;
+      const prefix = lang === 'kk' ? 'Тойға дейін: ' : 'До свадьбы: ';
+      const dayUnit = lang === 'kk' ? ' күн ' : ' дней ';
+      const hourUnit = lang === 'kk' ? ' сағат ' : ' часов ';
+      const minUnit = lang === 'kk' ? ' минут' : ' минут';
 
-<input type="text" name="entry.32785838" placeholder="Аты-жөніңіз" required>
+      countdownEl.innerHTML = prefix + days + dayUnit + hours + hourUnit + minutes + minUnit;
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
 
-<select name="entry.969246838">
-<option value="Бір өзім барамын">Бір өзім барамын</option>
-<option value="Жұбайыммен барамын">Жұбайыммен барамын</option>
-<option value="Өкінішке орай бара алмаймын">Өкінішке орай бара алмаймын</option>
-</select>
+    // Language switcher
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const translatable = document.querySelectorAll('[data-kk], [data-ru], [data-kk-placeholder], [data-ru-placeholder]');
 
-<button type="submit">Жіберу</button>
-</form>
+    function setLanguage(lang) {
+      document.body.dataset.lang = lang;
+      document.documentElement.lang = lang;
 
-<footer>Алишер & Земфира • 2026</footer>
+      langButtons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
 
-</section>
+      translatable.forEach(el => {
+        if (el.tagName === 'INPUT') {
+          el.placeholder = el.getAttribute(`data-${lang}-placeholder`) || el.placeholder;
+        } else if (el.tagName === 'OPTION') {
+          el.textContent = el.getAttribute(`data-${lang}`) || el.textContent;
+        } else {
+          el.innerHTML = el.getAttribute(`data-${lang}`) || el.innerHTML;
+        }
+      });
 
-<script>
-let slides=document.querySelectorAll('.slide');
-let index=0;
-setInterval(()=>{
-slides[index].classList.remove('active');
-index=(index+1)%slides.length;
-slides[index].classList.add('active');
-},4000);
+      // Calendar header & weekdays
+      document.querySelector('.calendar h2').textContent = 
+        lang === 'kk' ? 'Шілде 2026' : 'Июль 2026';
 
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add('show');
-}
-});
-});
-observer.observe(document.querySelector('.invite-text'));
+      const weekdays = document.querySelectorAll('.calendar th');
+      const kkDays = ['Дс','Сс','Ср','Бс','Жм','Сн','Жс'];
+      const ruDays = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+      weekdays.forEach((th, i) => {
+        th.textContent = lang === 'kk' ? kkDays[i] : ruDays[i];
+      });
+    }
 
-const weddingDate=new Date("July 18, 2026 17:00:00").getTime();
-const countdown=document.getElementById("countdown");
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        setLanguage(btn.dataset.lang);
+      });
+    });
 
-setInterval(()=>{
-const now=new Date().getTime();
-const distance=weddingDate-now;
-
-const days=Math.floor(distance/(1000*60*60*24));
-const hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-const minutes=Math.floor((distance%(1000*60*60))/(1000*60));
-
-countdown.innerHTML=`Тойға дейін: ${days} күн ${hours} сағат ${minutes} минут`;
-},1000);
-</script>
-
+    // Initial set
+    setLanguage('kk');
+  </script>
 </body>
 </html>

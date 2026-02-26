@@ -30,9 +30,18 @@
       align-items:center;
       text-align:center;
       padding:60px 20px;
+      position: relative;
     }
-    .first-screen{padding:0;}
-    .first-image{ width:95%; height:95vh; }
+    .first-screen{
+      padding:0;
+      position: relative;
+    }
+    .first-image{ 
+      width:95%; 
+      height: auto;
+      margin-top: 500px
+      object-fit: cover;
+    }
 
     /* HERO */
     .hero{
@@ -62,7 +71,38 @@
       background:linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0.2));
     }
 
-    /* INVITE */
+    /* Language Switcher — только на первой секции */
+    #lang-switcher {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      z-index: 100;
+      display: flex;
+      gap: 10px;
+    }
+    .lang-btn {
+      padding: 10px 16px;
+      font-size: 15px;
+      font-weight: 500;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: #b38b59;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      opacity: 1;
+    }
+    .lang-btn:hover {
+      background: #9c774b;
+      transform: translateY(-2px);
+    }
+    .lang-btn.active {
+      background: #8a623f;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+    }
+
+    /* остальные стили без изменений */
     .invite-text{
       max-width:800px;
       opacity:0;
@@ -83,8 +123,6 @@
       font-size:16px;
       letter-spacing:2px;
     }
-
-    /* CALENDAR */
     .calendar{
       width:95%;
       max-width:360px;
@@ -112,8 +150,6 @@
       font-weight:bold;
       color:#b38b59;
     }
-
-    /* LOCATION */
     .location-box{
       background:#fff;
       padding:25px;
@@ -138,15 +174,11 @@
     }
     .dg-icon{ width:26px; height:26px; }
     .map-img{ width:100%; max-width:350px; border-radius:20px; margin-top:20px; }
-
-    /* COUNTDOWN */
     .countdown{
       margin-top:25px;
       font-size:18px;
       letter-spacing:2px;
     }
-
-    /* RSVP */
     .rsvp-title{
       font-family:'Cormorant Garamond',serif;
       font-size:28px;
@@ -183,47 +215,18 @@
       font-size:14px;
       color:#777;
     }
-
-    /* Language Switcher */
-    #lang-switcher {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 9999;
-      display: flex;
-      gap: 10px;
-    }
-    .lang-btn {
-      padding: 10px 16px;
-      font-size: 15px;
-      font-weight: 500;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: all 0.3s;
-      background: #b38b59;
-      color: white;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-    .lang-btn:hover {
-      background: #9c774b;
-      transform: translateY(-2px);
-    }
-    .lang-btn.active {
-      background: #8a623f;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-    }
   </style>
 </head>
 <body data-lang="kk">
 
-  <div id="lang-switcher">
-    <button class="lang-btn active" data-lang="kk">Қазақша</button>
-    <button class="lang-btn" data-lang="ru">Русский</button>
-  </div>
-
   <section class="first-screen">
     <img src="AZ.png" class="first-image">
+
+    <!-- Переключатель ТОЛЬКО здесь -->
+    <div id="lang-switcher">
+      <button class="lang-btn active" data-lang="kk">Қазақша</button>
+      <button class="lang-btn" data-lang="ru">Русский</button>
+    </div>
   </section>
 
   <section class="hero">
@@ -250,6 +253,8 @@
       <div class="countdown" id="countdown"></div>
     </div>
   </section>
+
+  <!-- Остальные секции без изменений, переключателя здесь уже нет -->
 
   <section>
     <div class="calendar">
@@ -357,7 +362,6 @@
         }
       });
 
-      // Calendar header & weekdays
       document.querySelector('.calendar h2').textContent = 
         lang === 'kk' ? 'Шілде 2026' : 'Июль 2026';
 
@@ -375,7 +379,7 @@
       });
     });
 
-    // Initial set
+    // Инициализация
     setLanguage('kk');
   </script>
 </body>
